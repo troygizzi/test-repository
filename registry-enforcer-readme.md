@@ -1,6 +1,17 @@
 # Registry Enforcer
 
+## Overview
+
+Headless application (no user interface) that watches the Windows Registry for changes to specified keys,
+and restores the preferred values if they are changed by some other process
+(e.g., Windows group policy settings pushed to your workstation by your company's IT department).
+
+See the [Registry Settings](#registry-settings) section below for instructions on
+how to specify which registry values you want this application to enforce.
+
 ## App Settings
+
+### Logging
 
 - `LogLevel` - (optional; defaults to `Info`) Can be any of the values below.
                Note that each of these levels is inclusive of the levels below it;
@@ -16,6 +27,20 @@
   - `Error` - Logs non-fatal errors, i.e., errors that cause a certain piece of functionality to break,
               but allow the application to keep running.
   - `Fatal` - Only logs details about errors that force the application to exit.
+
+### Registry Settings
+
+For each Registry value that you want enforced, add an app setting whose
+`key` begins with `RegistrySetting`, and whose `value` is a pipe-delimited
+string containing (1) the full path to the value,
+(2) the value type (typically `REG_SZ` for strings, or `REG_DWORD` for integers), and
+(3) the value itself.
+
+#### Example:
+```
+<add key="RegistrySetting_ChromeHTTPS_ProgId"
+     value="HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice\ProgId|REG_SZ|ChromeHTML"/>
+```
 
 ## Troubleshooting
 
