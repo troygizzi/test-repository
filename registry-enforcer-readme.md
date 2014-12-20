@@ -13,6 +13,16 @@ how to specify which registry values you want this application to enforce.
 
 ### Logging
 
+- `LogDirectoryPath` - (optional; defaults to `C:\Temp\Logs\RegistryEnforcer`)
+                     The directory into which to write the log files.
+                     If this directory does not exist, it will be created automatically.
+                     If the drive letter does not exist, however, the application will terminate.
+                     There will be a new log file created each day,
+                     e.g., *RegistryEnforcer_2014-12-19.log*.
+
+- `LogArchiveDays` - (optional; defaults to `30`)
+                   How many days to keep log files before automatically deleting them.
+
 - `LogLevel` - (optional; defaults to `Info`) Can be any of the values below.
                Note that each of these levels is inclusive of the levels below it;
                e.g., `Error` also includes all messages that would be logged
@@ -27,6 +37,11 @@ how to specify which registry values you want this application to enforce.
   - `Error` - Logs non-fatal errors, i.e., errors that cause a certain piece of functionality to break,
               but allow the application to keep running.
   - `Fatal` - Only logs details about errors that force the application to exit.
+
+### Preferences
+
+- AutoStart - (optional; defaults to `true`) Whether to automatically start this application
+              whenever Windows starts. Can be set to either `true` or `false`.
 
 ### Registry Settings
 
