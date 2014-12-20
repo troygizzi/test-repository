@@ -1,19 +1,21 @@
-# Registry Settings Keeper
+# Registry Enforcer
 
 ## App Settings
 
-- `LogLevel` - can be any of the following (optional; defaults to `Info`)
+- `LogLevel` - (optional; defaults to `Info`) Can be any of the values below.
+               Note that each of these levels is inclusive of the levels below it;
+               e.g., `Error` also includes all messages that would be logged
+               with a log level of `Fatal`.
 
-  - `Trace` - Verbose debugging. Includes messages to indicate every method entry and exit point,
-              as well as other significant points in the flow of the code.
-  - `Debug` - Includes app settings and parameter values, and local variable values at key points.
-  - `Info` - Information messages about the state of the application or significant events,
+  - `Trace` - Verbose debugging; logs messages to indicate every method entry and exit point,
+              local variable values at key points, and other significant points in the flow of the code.
+  - `Debug` - Logs app settings at startup, and parameter values at every method call.
+  - `Info` - Logs informational messages about the state of the application or significant events,
              e.g., when a registry setting was externally modified and had to be reset.
-  - `Warn` - Messages that indicate an unusual condition that may indicate a problem,
-             but did not cause an error.
-  - `Error` - An error that caused a certain piece of functionality to break,
-              but allowed the application to keep running.
-  - `Fatal` - An error that forces the application to exit.
+  - `Warn` - Logs unusual condition that may indicate a problem, but are not causing errors.
+  - `Error` - Logs non-fatal errors, i.e., errors that cause a certain piece of functionality to break,
+              but allow the application to keep running.
+  - `Fatal` - Only logs details about errors that force the application to exit.
 
 ## Troubleshooting
 
@@ -22,5 +24,7 @@
 If any of the required startup steps fails -- such as initializing the `Log` class --
 the application will terminate.
 
-When this happens, the error details will be written to the **Windows Event Viewer**
-under *Windows Logs > Application*, as events with the Source "RegistryEnforcer".
+When this happens, the error details will be written to the Windows Event Log.
+These details can be viewed by opening the **Windows Event Viewer**
+(*Start > Control Panel > Administrative Tools > Event Viewer*),
+navigating to *Windows Logs > Application*, and filtering for events with a Source of "RegistryEnforcer".
